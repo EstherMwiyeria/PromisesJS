@@ -10,6 +10,7 @@ console.log(logMessage("Expired Password", 1000));
 // You have an array of user IDs and a function getUserData(id) 
 // that returns a Promise with user data when given a user ID. Write an asynchronous 
 // function that fetches and logs the data for each user ID one by one, in sequence.
+
 async function getUserDataIds(id){
     for(i = 0; i < id.length; i++){
         const dataIdValidation = await getUserData(id[i]);
@@ -24,18 +25,26 @@ getUserDataIds([204,305,412,383])
 //  The Promise resolves if the task is successful and rejects if there's
 // an error. Write a function that calls performTask() and logs 
 // a custom success message if the task is successful, and a custom error message if there's an error.
-function taskCompletion() {
-    performTask();
+let dataMessage = [{}];
+let performTask = new Promise((resolve,reject)=>{
+    if(dataMessage){
+        setTimeout(()=>{resolve("Task is successful"
 
-    then(() => {
-        console.log("Task is successful!");
+        )},3000);
+    }
+    else{
+        setTimeout(()=>{reject("Occurrence of an error while performing the task"
 
-    })
-    .catch(() => {
-        console.log("Occcurrence of an error while performing the task");
-
-    });
-    console.log(performTask());
+        )},3000);
+    }
+});
+async function performTasks() {
+    let response = await performTask;
+    console.log({response});
     
 }
-taskCompletion()
+performTasks();
+
+
+
+
